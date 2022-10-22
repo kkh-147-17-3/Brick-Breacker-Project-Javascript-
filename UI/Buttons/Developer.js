@@ -1,68 +1,43 @@
-export default class Developer{
-    constructor(id){
-        this.id = id;
-        this.canvas = document.getElementById(id);
-        this.ctx = this.canvas.getContext("2d");
-        this.color = "white";
-        this.text = this.id.toUpperCase();
-        this.padding = 5;
-        this.isOnMouse = false;
-
-        this.canvas.onmouseenter = function(){
-            // console.log("check");
-            this.isOnMouse = true;
-          }.bind(this);
-  
-          this.canvas.onmouseout = function() {
-            this.isOnMouse =false;
-          }.bind(this);
-  
-          this.canvas.onmousedown = function() {
-            this.padding = 0;
-          }.bind(this);
-  
-          this.canvas.onmouseup = function() {
-            this.padding = 5;
-          }.bind(this);
+export default class Developer {
+  constructor() {
+      let canvas = document.createElement("canvas");
+      canvas.setAttribute("id", "develop");
+      document.getElementById("page").insertAdjacentElement("afterbegin",canvas);
+      this.canvas = canvas;
+      this.ctx = this.canvas.getContext("2d");
+      this.canvas.width = 1510;
+      this.canvas.height = 870;
+      this.alpha =0;
+  }
+  draw() {
+      //this.ctx.fillRect(100,100,100,100);
+      this.ctx.save();
+      this.ctx.beginPath();
+      this.ctx.globalAlpha = this.alpha;
+      this.ctx.font = "90pt Orbitron";
+      this.ctx.textAlign = "center";
+      this.ctx.strokeStyle = "yellow";
+      this.ctx.strokeText("Developer", this.canvas.width / 2, 200)
+      this.ctx.closePath();
+      this.ctx.beginPath();
+      this.ctx.font = "30pt Orbitron";
+      this.ctx.textAlign = "center";
+      this.ctx.strokeStyle = "pink";
+      this.ctx.strokeText("PARK JUN YOUNG", this.canvas.width / 2, this.canvas.height / 2 + 100);
+      this.ctx.strokeText("KIM KYUNG HWAN", this.canvas.width / 2, this.canvas.height / 2 + 150);
+      this.ctx.strokeText("HAN TAE HEE", this.canvas.width / 2, this.canvas.height / 2 + 200);
+      this.ctx.strokeText("LEE JUN HYUN", this.canvas.width / 2, this.canvas.height / 2 + 250);
+      this.ctx.strokeText("JEON JAE MIN", this.canvas.width / 2, this.canvas.height / 2 + 300);
+      this.ctx.closePath();
+      this.ctx.restore();
+      // console.log("check");
+  }
+  fadeIn(){
+    if(this.alpha + 0.01 > 1){
+     this.alpha = 1;
     }
-
-    draw() {
-        if(this.isOnMouse) {
-            this.ctx.save();
-            this.ctx.clearRect(0,0,this.canvas.width,this.canvas.height);
-    
-            this.ctx.font ="50px Orbitron";
-            this.ctx.textBaseline = "middle";
-            this.ctx.textAlign = "center"
-            
-            
-            this.ctx.shadowBlur = 30;
-            this.ctx.shadowColor = "#c542cb";
-            this.ctx.fillStyle = "white";
-            this.ctx.fillText(this.text,this.canvas.width/2,this.canvas.height/2);
-            this.ctx.fillStyle = "#d0535e";
-            this.ctx.shadowBlur = 30;
-            this.ctx.shadowColor = "purple";
-            this.ctx.fillText(this.text, this.canvas.width/2+ this.padding, this.canvas.height/2 + this.padding);
-            this.ctx.restore();
-          }
-          else {
-            this.ctx.save();
-            this.ctx.clearRect(0,0,this.canvas.width,this.canvas.height);
-            this.ctx.font ="50px Orbitron";
-            this.ctx.textBaseline = "middle";
-            this.ctx.textAlign = "center"
-            
-            this.ctx.fillStyle = "#d0535e";
-            this.ctx.shadowBlur = 30;
-            this.ctx.shadowColor = "purple";
-    
-            this.ctx.shadowBlur = 30;
-            this.ctx.shadowColor = "#c542cb";
-            this.ctx.fillText(this.text, this.canvas.width/2+ this.padding, this.canvas.height/2 + this.padding);
-            this.ctx.fillStyle = "white";
-            this.ctx.fillText(this.text,this.canvas.width/2,this.canvas.height/2);
-            this.ctx.restore();
-          }
+    else{
+     this.alpha +=0.01;
     }
+  }
 }

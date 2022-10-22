@@ -9,13 +9,19 @@
 
 </head>
 <body>
-    <canvas></canvas>
-    <div id="main">
-        <canvas id="start"></canvas>
-        <canvas id="setting"></canvas>
-        <canvas id="help"></canvas>
-        <canvas id="developer" width="400" height="150"></canvas>
+    <canvas id="background"></canvas>
+    <div id="ui">
+        <div id="page">
+            
+        </div>
+        <div id="button" onmouseup= ' style="display:none" ' >
+            <canvas id="start"></canvas>
+            <canvas id="setting"></canvas>
+            <canvas id="help"></canvas>
+            <canvas id="developer" width="400" height="150"></canvas>
+        </div>
     </div>
     <script type="module" src="MainMenu.js"></script>
+    <!-- <script src="test.js"></script> -->
 </body>
 </html>

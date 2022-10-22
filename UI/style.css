@@ -7,7 +7,7 @@ div{
     justify-content: space-between;
 }
 
-#main{
+#button{
     display:flex;
     justify-content: space-between;
 
@@ -15,10 +15,28 @@ div{
     top: 700px;
 }
 
-#main *{
+#button *{
     margin-left :20px;
     margin-right: 20px;
 }
+
+#background{
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    z-index: -1;
+}
+
+#page *{
+    position: absolute;
+    top: 0%;
+    left: 0%;
+}
+
+
+/* #ui{
+    position: absolute;
+} */
 
 /* #player1, #player2{
     margin-left : auto;
