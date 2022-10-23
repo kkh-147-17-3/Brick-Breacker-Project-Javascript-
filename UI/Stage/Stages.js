@@ -2,7 +2,7 @@ import Baby from "./Baby.js";
 import Easy from "./Easy.js";
 import Hard from "./Hard.js";
 import Hell from "./Hell.js";
-import Nomal from "./Nomal.js";
+import Nomal from "./Normal.js";
 
 export default class Stages {
     constructor(canvas) {
