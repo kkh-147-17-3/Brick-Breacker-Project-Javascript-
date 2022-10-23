@@ -10,6 +10,7 @@ class Button{
       this.padding = 5;
       this.isOnMouse = false;
       this.isOnClick = false;
+      this.canvas.style.display = "none";   // 캔버스를 생성 한 후 기본은 none 상태로 둔 후 버튼을 클릭하면 캔버스를 그리기 시작.
       this.canvas.onmouseenter = function(){
           this.isOnMouse = true;
         }.bind(this);
@@ -67,5 +68,13 @@ class Button{
         this.ctx.fillText(this.text,this.canvas.width/2,this.canvas.height/2);
         this.ctx.restore();
       }
+  }
+  // html에서 속성을 바꾸는걸 자바스크립트로 이동.
+  on(){
+    this.canvas.style.display = "";
+  }
+  // html에서 속성을 바꾸는걸 자바스크립트로 이동.
+  off(){
+    this.canvas.style.display = "none";
   }
 }export default Button;

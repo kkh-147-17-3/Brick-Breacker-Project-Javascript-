@@ -15,9 +15,12 @@ export default class Stages {
       this.hell =new Hell(910,400);
       this.alpha =0;
       this.stages = [];
-      this.canvas.onmousemove = this.clickHandler.bind(this);
+      this.canvas.onmousemove = this.mouseHandler.bind(this);
+
+
+
     }
-    clickHandler(e) {
+    mouseHandler(e) {
       this.baby.update(e.x,e.y,this.ctx);
       this.easy.update(e.x,e.y,this.ctx);
       this.nomal.update(e.x,e.y,this.ctx);

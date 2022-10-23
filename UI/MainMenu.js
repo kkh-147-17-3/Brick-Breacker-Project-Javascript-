@@ -8,8 +8,11 @@ import Start from "./Buttons/Start.js";
 class MainMenu {
   constructor() {
     
-    this.status = "ready";
+    this.status = "opening";
     this.title = new Title();
+    this.title.onOpeningFinished = () => {
+      this.status = "ready";
+    }
     this.backGround = new BackGround();
     this.startBtn = new Button("start");
     this.start = new Start();
@@ -34,13 +37,23 @@ class MainMenu {
   display() {
     
     this.backGround.draw();
-    this.title.draw();
-
+    
     switch(this.status){
-      case "ready": 
-      {
+      case "opening":
+        {
+          this.title.opening();
+        }
+        break;
+        case "ready": 
+        {
+        this.title.draw();
         this.title.fadeIn();
-        
+          // 처음 화면을 뛰울때 모든 버튼 on.
+        this.startBtn.on();
+        this.settingBtn.on();
+        this.developerBtn.on();
+        this.helpBtn.on();
+
         this.startBtn.draw();
         this.settingBtn.draw();
         this.developerBtn.draw();
@@ -50,11 +63,20 @@ class MainMenu {
       case "start":
       {
         this.title.fadeOut();
-        // this.start.update();
         this.start.fadeIn();
         this.start.draw();
         this.backGround.upSpeed();
-        // this.title.draw(color);
+        // 다른 화면으로 넘어갈때 모든 버튼 off.
+        this.startBtn.off();
+        this.settingBtn.off();
+        this.developerBtn.off();
+        this.helpBtn.off();
+        // 뒤로 가기 버튼을 눌렀을때 status 값을 바꾸며, 현재 캔버스는 페이드 아웃(페이드아웃 기능이 잘 안먹혀서 일단 캔버스를 끄는걸로함)
+        this.start.backBtnClick = function() {
+          this.start.fadeOut();
+          this.status = "ready";
+        }.bind(this);
+
       } break;
       case "setting" :
       {
@@ -69,14 +91,24 @@ class MainMenu {
           this.title.fadeOut();
           this.developer.fadeIn();
           this.developer.draw();
-
+          // 다른 화면으로 넘어갈때 모든 버튼 off.
+          this.startBtn.off();
+          this.settingBtn.off();
+          this.developerBtn.off();
+          this.helpBtn.off();
+          // 뒤로 가기 버튼을 눌렀을때 status 값을 바꾸며, 현재 캔버스는 페이드 아웃(페이드아웃 기능이 잘 안먹혀서 일단 캔버스를 끄는걸로함)
+          this.developer.backBtnClick = function() {
+            this.developer.fadeOut();
+            this.status = "ready";
+          }.bind(this);
+          
         }break;
-
-
-
-
-    }
-    
+        
+        
+        
+        
+      }
+      
     
     
     
@@ -86,6 +118,6 @@ class MainMenu {
 
 let show = new MainMenu();
 show.display();
-//show.audio.play();
+// show.audio.play();
 
 

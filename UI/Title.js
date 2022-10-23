@@ -15,6 +15,52 @@ export default class Title {
         this.appearIndex = 25;
         this.alpha =0;
         this.index =0;
+
+        this.dashLen = 300;
+        this.dashOffset = this.dashLen;
+        this.speed = 50;
+        this.text = "BRICK BREAKER";
+        this.x = 0;
+        this.i = 0;
+        this.count = 0;
+    }
+
+    //추가됨
+    opening(){
+
+        this.ctx.font = "120px Orbitron"; 
+        this.ctx.lineWidth = 8; this.ctx.lineJoin = "round";
+        let textLength = this.text.length;
+        
+        this.ctx.fillStyle="rgb(0,0,0)";
+        this.ctx.fillRect(0,0,this.canvas.width, this.canvas.height);
+        let colorIndex = (++this.index)%2;
+        // this.ctx.shadowBlur = 5;
+        // this.ctx.shadowColor = 'white';
+        // this.ctx.shadowOffsetX = 5;
+        // this.ctx.shadowOffsetY = 5;
+        this.ctx.strokeStyle = this.colors[colorIndex];
+        if (this.i < textLength){
+            if(this.dashOffset > 0){
+                this.ctx.save();
+                this.ctx.setLineDash([this.dashLen - this.dashOffset, this.dashOffset - this.speed]); // create a long dash mask
+                this.dashOffset -= this.speed;                                         // reduce dash length
+                this.ctx.strokeText(this.text[this.i], this.x + (this.canvas.width/2)-567, 275);
+                this.ctx.restore();                               // stroke letter
+            }
+            else{
+                this.dashOffset = this.dashLen;     
+                this.x += this.ctx.measureText(this.text[this.i]).width;
+                this.i++// prep next char
+                // if (i < txt.length) requestAnimationFrame(loop);
+                // else animate();
+            }
+        }
+        else{
+            setTimeout(()=>this.onOpeningFinished(),1000);
+        }
+        this.ctx.setLineDash([]);
+        this.ctx.strokeText(this.text.slice(0,this.i),(this.canvas.width/2)-567, 275);
     }
 
     draw() {
@@ -50,14 +96,10 @@ export default class Title {
             this.alpha -=0.08;
         }
 
-        //   if(this.appearIndex < 25){
-        //     this.appearIndex++;
-        //     this.alpha -=0.04;
-
-        // }
       }
 
       fadeIn(){
+          this.canvas.style.display = "";
            if(this.alpha + 0.04 > 1){
             this.alpha = 1;
         }
