@@ -7,18 +7,6 @@ div{
     justify-content: space-between;
 }
 
-#button{
-    display:flex;
-    justify-content: space-between;
-
-    position: absolute;
-    top: 700px;
-}
-
-#button *{
-    margin-left :20px;
-    margin-right: 20px;
-}
 
 #background{
     position: absolute;
@@ -27,12 +15,11 @@ div{
     z-index: -1;
 }
 
-#page *{
+#ui {
     position: absolute;
-    top: 0%;
-    left: 0%;
+    top : 0%;
+    left : 0%;
 }
-
 
 /* #ui{
     position: absolute;

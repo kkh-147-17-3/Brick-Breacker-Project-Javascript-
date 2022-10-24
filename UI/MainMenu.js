@@ -1,123 +1,138 @@
-import Title from "./Title.js";
+// import Developer from "./Buttons/Developer.js";
+// import Button from "./Buttons/Button"
+
 import Button from "./Buttons/Button.js";
-import BackGround from "./background/Background.js";
-import Developer from "./Buttons/Developer.js";
-import Start from "./Buttons/Start.js";
-
-
-class MainMenu {
-  constructor() {
+import Title from "./Title.js"
     
-    this.status = "opening";
-    this.title = new Title();
-    this.title.onOpeningFinished = () => {
-      this.status = "ready";
+
+
+export default class MainMenu {
+    constructor() {
+        this.canvas = document.querySelector("#ui");
+        this.ctx = this.canvas.getContext("2d");
+        this.canvas.width = 1510;
+        this.canvas.height = 870;
+        this.alpha = 0;
+        this.title = new Title();
+        this.startBtn = new Button("start",50,700);
+        this.settingBtn = new Button("setting",370,700);
+        this.helpBtn = new Button("help",770,700);
+        this.developerBtn = new Button("developer",1100,700);
+        this.status = "opening";
+
+
+        
+        //오프닝 멤버 변수.
+        this.index = 0;
+        this.dashLen = 300;
+        this.dashOffset = this.dashLen;
+        this.speed = 50;
+        this.text = "BRICK BREAKER";
+        this.x = 0;
+        this.i = 0;
+        this.count = 0;
     }
-    this.backGround = new BackGround();
-    this.startBtn = new Button("start");
-    this.start = new Start();
-    this.settingBtn = new Button("setting");
-    this.helpBtn = new Button("help");
-    this.developerBtn = new Button("developer");
-    this.developer = new Developer();
-    this.startBtn.canvas.addEventListener("click",()=>{this.status = "start"});
-    this.settingBtn.canvas.addEventListener("click",()=>{this.status = "setting"});
-    this.helpBtn.canvas.addEventListener("click",()=>{this.status = "help"});
-    this.developerBtn.canvas.addEventListener("click",()=>{this.status = "developer"});
-    this.index =0;
-    this.audio = new Audio("./sound/BackSound.mp3");
-    
-    // this.audio.autoplay = true;
-    // this.audio.src = "./sound/BackSound.mp3";
-    
-
-  }
-  
-  
-  display() {
-    
-    this.backGround.draw();
-    
-    switch(this.status){
-      case "opening":
-        {
-          this.title.opening();
+    mouseHandler() {
+        //마우스가 올라가면 버튼 색 변경.
+        this.canvas.onmousemove = (e) => {
+            this.startBtn.onMouse(e.x,e.y,this.ctx);
+            this.helpBtn.onMouse(e.x,e.y,this.ctx);
+            this.settingBtn.onMouse(e.x,e.y,this.ctx);
+            this.developerBtn.onMouse(e.x,e.y,this.ctx);
         }
-        break;
-        case "ready": 
-        {
-        this.title.draw();
-        this.title.fadeIn();
-          // 처음 화면을 뛰울때 모든 버튼 on.
-        this.startBtn.on();
-        this.settingBtn.on();
-        this.developerBtn.on();
-        this.helpBtn.on();
+        //마우스가 눌렸을때 버튼 디자인 변경.
+        this.canvas.onmousedown = (e) => {
+            if(this.startBtn.onClick(e.x,e.y,this.ctx)){
+                this.status = this.startBtn.status;
+                this.onClick();
+            };
+            if(this.helpBtn.onClick(e.x,e.y,this.ctx)){
+                this.status = this.helpBtn.status;
+                this.onClick();
+            };
+            if(this.settingBtn.onClick(e.x,e.y,this.ctx)){
+                this.status = this.settingBtn.status;
+                this.onClick();
+            };
+            if(this.developerBtn.onClick(e.x,e.y,this.ctx)){
+                this.status = this.developerBtn.status;
+                this.onClick();
+            }
+        }
+    }
 
-        this.startBtn.draw();
-        this.settingBtn.draw();
-        this.developerBtn.draw();
-        this.helpBtn.draw();
-      }
-      break;
-      case "start":
-      {
-        this.title.fadeOut();
-        this.start.fadeIn();
-        this.start.draw();
-        this.backGround.upSpeed();
-        // 다른 화면으로 넘어갈때 모든 버튼 off.
-        this.startBtn.off();
-        this.settingBtn.off();
-        this.developerBtn.off();
-        this.helpBtn.off();
-        // 뒤로 가기 버튼을 눌렀을때 status 값을 바꾸며, 현재 캔버스는 페이드 아웃(페이드아웃 기능이 잘 안먹혀서 일단 캔버스를 끄는걸로함)
-        this.start.backBtnClick = function() {
-          this.start.fadeOut();
-          this.status = "ready";
-        }.bind(this);
 
-      } break;
-      case "setting" :
-      {
-        console.log("sett")
-      }break;
-      case "help":
-      {
-        console.log("he");
-      }break;
-      case "developer":
-        {          
-          this.title.fadeOut();
-          this.developer.fadeIn();
-          this.developer.draw();
-          // 다른 화면으로 넘어갈때 모든 버튼 off.
-          this.startBtn.off();
-          this.settingBtn.off();
-          this.developerBtn.off();
-          this.helpBtn.off();
-          // 뒤로 가기 버튼을 눌렀을때 status 값을 바꾸며, 현재 캔버스는 페이드 아웃(페이드아웃 기능이 잘 안먹혀서 일단 캔버스를 끄는걸로함)
-          this.developer.backBtnClick = function() {
-            this.developer.fadeOut();
-            this.status = "ready";
-          }.bind(this);
-          
-        }break;
-        
-        
-        
-        
+    //추가됨
+    opening(){
+
+        this.ctx.font = "120px Orbitron"; 
+        this.ctx.lineWidth = 8; this.ctx.lineJoin = "round";
+        let textLength = this.text.length;
+        let colors = ["#c542cb","#d0535e"];
+
+        this.ctx.fillStyle="rgb(0,0,0)";
+        this.ctx.fillRect(0,0,this.canvas.width, this.canvas.height);
+        let colorIndex = (++this.index)%2;
+
+        this.ctx.strokeStyle = colors[colorIndex];
+        if (this.i < textLength){
+            if(this.dashOffset > 0){
+                this.ctx.save();
+                this.ctx.setLineDash([this.dashLen - this.dashOffset, this.dashOffset - this.speed]); // create a long dash mask
+                this.dashOffset -= this.speed;                                         // reduce dash length
+                this.ctx.strokeText(this.text[this.i], this.x + (this.canvas.width/2)-567, 275);
+                this.ctx.restore();                               // stroke letter
+            }
+            else{
+                this.dashOffset = this.dashLen;     
+                this.x += this.ctx.measureText(this.text[this.i]).width;
+                this.i++// prep next char
+
+            }
+        }
+        else{
+            setTimeout(()=>this.onOpeningFinished(),1000);
+        }
+        this.ctx.setLineDash([]);
+        this.ctx.strokeText(this.text.slice(0,this.i),(this.canvas.width/2)-567, 275);
+    }
+
+
+    draw() {
+        this.ctx.save();
+        this.ctx.clearRect(0,0,this.canvas.width,this.canvas.height);
+        this.ctx.globalAlpha = this.alpha;
+        this.title.draw(this.ctx);
+        this.startBtn.draw(this.ctx);
+        this.settingBtn.draw(this.ctx);
+        this.helpBtn.draw(this.ctx);
+        this.developerBtn.draw(this.ctx);
+        this.ctx.restore();
+
+        if(this.ctx.globalAlpha == 1) {
+            this.onMouse();
+        }
       }
-      
-    
-    
-    
-    setTimeout(this.display.bind(this),17);
-  }
+
+      fadeOut(){
+        if(this.alpha - 0.08 < 0){
+            this.alpha = 0;
+        }
+        else{
+            this.alpha -=0.08;
+            console.log(this.alpha);
+        }
+
+      }
+
+      fadeIn(){
+        //   this.canvas.style.display = "";
+           if(this.alpha + 0.04 > 1){
+            this.alpha = 1;
+        }
+        else{
+            this.alpha +=0.04;
+        }
+      }
+
 }
-
-let show = new MainMenu();
-show.display();
-// show.audio.play();
-
-

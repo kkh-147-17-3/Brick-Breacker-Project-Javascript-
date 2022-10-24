@@ -7,7 +7,6 @@ export default class Baby{
         this.isOnClick = false;
 
     }
-
     draw(ctx){
         if(this.isOnMouse){
             ctx.font ="100px Orbitron";
@@ -43,7 +42,7 @@ export default class Baby{
     }
     
     update(x,y,ctx){
-        let textSize = ctx.measureText("Baby").width;
+        let textSize = ctx.measureText("Baby").width*2;
         let maxX = textSize+this.x;
         let minX = this.x;
         let maxY = 100+this.y;
@@ -52,6 +51,6 @@ export default class Baby{
         if(x>=minX && x<=maxX && y>=minY && y<=maxY)
             this.isOnMouse = true;
         else 
-            this.isOnMouse = false;
+            this.isOnMouse = false;   
     }
 }

@@ -43,7 +43,7 @@ export default class Easy{
     }
     
     update(x,y,ctx){
-        let textSize = ctx.measureText("Easy").width;
+        let textSize = ctx.measureText("Easy").width*2;
         let maxX = textSize+this.x;
         let minX = this.x;
         let maxY = 100+this.y;

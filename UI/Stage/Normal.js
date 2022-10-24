@@ -1,4 +1,4 @@
-export default class Nomal{
+export default class Normal{
     constructor(x=0,y=0){
         this.x = x;
         this.y = y;
@@ -21,7 +21,7 @@ export default class Nomal{
             ctx.fillStyle = "#d0535e";
             ctx.shadowBlur = 30;
             ctx.shadowColor = "purple";
-            ctx.fillText("Noraml", this.x+ this.padding, this.y + this.padding);
+            ctx.fillText("Normal", this.x+ this.padding, this.y + this.padding);
         }
         else {
 
@@ -43,7 +43,7 @@ export default class Nomal{
     }
     
     update(x,y,ctx){
-        let textSize = ctx.measureText("Normal").width;
+        let textSize = ctx.measureText("Normal").width*2;
         let maxX = textSize+this.x;
         let minX = this.x;
         let maxY = 100+this.y;

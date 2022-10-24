@@ -43,7 +43,7 @@ export default class Hell{
     }
     
     update(x,y,ctx){
-        let textSize = ctx.measureText("Hell").width;
+        let textSize = ctx.measureText("Hell").width*2;
         let maxX = textSize+this.x;
         let minX = this.x;
         let maxY = 100+this.y;

@@ -22,4 +22,12 @@ export default class BackGround {
         else 
             this.starParams.speed+=0.5;
     }
+
+    downSpeed() {
+        if(this.starParams.speed <= 1) {
+            return
+        }
+        else 
+            this.starParams.speed-=0.5;
+    }
 }

@@ -1,80 +1,78 @@
 
 class Button{
-  constructor(id){
-    
-      this.id = id;
-      this.canvas = document.getElementById(id);
-      this.ctx = this.canvas.getContext("2d");
+  constructor(text,x=0,y=0){
+      this.x = x;
+      this.y = y;
+      this.status = "";
+      this.text = text.toUpperCase();
       this.color = "white";
-      this.text = this.id.toUpperCase();
       this.padding = 5;
       this.isOnMouse = false;
-      this.isOnClick = false;
-      this.canvas.style.display = "none";   // 캔버스를 생성 한 후 기본은 none 상태로 둔 후 버튼을 클릭하면 캔버스를 그리기 시작.
-      this.canvas.onmouseenter = function(){
-          this.isOnMouse = true;
-        }.bind(this);
+    }
+    onMouse(x,y,ctx) {
+      ctx.font = "50px Orbitron";
+      let textSize = ctx.measureText(this.text).width;
+      // console.log(textSize);
+      let maxX = textSize+this.x;
+      let minX = this.x;
+      let maxY = 50+this.y;
+      let minY = this.y;
 
-        this.canvas.onmouseout = function() {
-          this.isOnMouse =false;
-          this.padding = 5;
-        }.bind(this);
-
-        this.canvas.onmousedown = function() {
-          this.isOnClick = true;
-          this.padding = 0;
-        }.bind(this);
-
-        this.canvas.onmouseup = function() {
-          this.padding = 5;
-        }.bind(this);
+      if(x>=minX && x<=maxX && y>=minY && y<=maxY) {
+        this.isOnMouse = true;
+      }
+      else 
+        this.isOnMouse = false;
+      
     }
 
-    draw(){
-      if(this.isOnMouse) {
-        this.ctx.save();
-        this.ctx.clearRect(0,0,this.canvas.width,this.canvas.height);
+    onClick(x,y,ctx) {
+      ctx.font = "50px Orbitron";
+      let textSize = ctx.measureText(this.text).width;
+      let maxX = textSize+this.x;
+      let minX = this.x;
+      let maxY = 50+this.y;
+      let minY = this.y;
 
-        this.ctx.font ="50px Orbitron";
-        this.ctx.textBaseline = "middle";
-        this.ctx.textAlign = "center"
-        
-        
-        this.ctx.shadowBlur = 30;
-        this.ctx.shadowColor = "#c542cb";
-        this.ctx.fillStyle = "white";
-        this.ctx.fillText(this.text,this.canvas.width/2,this.canvas.height/2);
-        this.ctx.fillStyle = "#d0535e";
-        this.ctx.shadowBlur = 30;
-        this.ctx.shadowColor = "purple";
-        this.ctx.fillText(this.text, this.canvas.width/2+ this.padding, this.canvas.height/2 + this.padding);
-        this.ctx.restore();
+      if(x>=minX && x<=maxX && y>=minY && y<=maxY) {
+        this.padding = 0;
+        this.status = this.text.toLowerCase();
+        return this.status;
+      }
+    }
+
+    draw(ctx){
+      if(this.isOnMouse) {
+        ctx.save();
+        ctx.font ="50px Orbitron";
+        ctx.textBaseline = "top";
+
+        ctx.shadowBlur = 30;
+        ctx.shadowColor = "#c542cb";
+        ctx.fillStyle = "white";
+        ctx.fillText(this.text,this.x,this.y);
+        ctx.fillStyle = "#d0535e";
+        ctx.shadowBlur = 30;
+        ctx.shadowColor = "purple";
+        ctx.fillText(this.text, this.x + this.padding, this.y + this.padding);
+        ctx.restore();
       }
       else {
-        this.ctx.save();
-        this.ctx.clearRect(0,0,this.canvas.width,this.canvas.height);
-        this.ctx.font ="50px Orbitron";
-        this.ctx.textBaseline = "middle";
-        this.ctx.textAlign = "center"
-        
-        this.ctx.fillStyle = "#d0535e";
-        this.ctx.shadowBlur = 30;
-        this.ctx.shadowColor = "purple";
+        ctx.save();
+        ctx.font ="50px Orbitron";
+        ctx.textBaseline = "top";
 
-        this.ctx.shadowBlur = 30;
-        this.ctx.shadowColor = "#c542cb";
-        this.ctx.fillText(this.text, this.canvas.width/2+ this.padding, this.canvas.height/2 + this.padding);
-        this.ctx.fillStyle = "white";
-        this.ctx.fillText(this.text,this.canvas.width/2,this.canvas.height/2);
-        this.ctx.restore();
+        
+        ctx.fillStyle = "#d0535e";
+        ctx.shadowBlur = 30;
+        ctx.shadowColor = "purple";
+
+        ctx.shadowBlur = 30;
+        ctx.shadowColor = "#c542cb";
+        ctx.fillText(this.text, this.x+ this.padding, this.y + this.padding);
+        ctx.fillStyle = "white";
+        ctx.fillText(this.text,this.x,this.y);
+        ctx.restore();
       }
-  }
-  // html에서 속성을 바꾸는걸 자바스크립트로 이동.
-  on(){
-    this.canvas.style.display = "";
-  }
-  // html에서 속성을 바꾸는걸 자바스크립트로 이동.
-  off(){
-    this.canvas.style.display = "none";
   }
 }export default Button;

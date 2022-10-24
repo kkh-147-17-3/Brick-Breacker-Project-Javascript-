@@ -8,14 +8,15 @@ export default class Stages {
     constructor(canvas) {
       this.canvas = canvas;
       this.ctx = this.canvas.getContext("2d");
-      this.baby =new Baby(60,100);
-      this.easy =new Easy(580,100);
-      this.nomal =new Nomal(1100,100);
-      this.hard =new Hard(330,400);
-      this.hell =new Hell(910,400);
+      this.baby =new Baby(60,200);
+      this.easy =new Easy(580,200);
+      this.nomal =new Nomal(1100,200);
+      this.hard =new Hard(330,500);
+      this.hell =new Hell(910,500);
       this.alpha =0;
       this.stages = [];
       this.canvas.onmousemove = this.mouseHandler.bind(this);
+      this.canvas.onClick = this.mouseHandler.bind(this);
 
 
 
