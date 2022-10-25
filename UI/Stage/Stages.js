@@ -1,44 +1,33 @@
+import Button from "../Buttons/Button.js";
+import Hard from "./Hard.js";
 import Baby from "./Baby.js";
 import Easy from "./Easy.js";
-import Hard from "./Hard.js";
 import Hell from "./Hell.js";
-import Nomal from "./Normal.js";
+import Normal from "./Normal.js";
 
-export default class Stages {
-    constructor(canvas) {
-      this.canvas = canvas;
-      this.ctx = this.canvas.getContext("2d");
-      this.baby =new Baby(60,200);
-      this.easy =new Easy(580,200);
-      this.nomal =new Nomal(1100,200);
-      this.hard =new Hard(330,500);
-      this.hell =new Hell(910,500);
-      this.alpha =0;
-      this.stages = [];
-      this.canvas.onmousemove = this.mouseHandler.bind(this);
-      this.canvas.onClick = this.mouseHandler.bind(this);
-
-
-
-    }
-    mouseHandler(e) {
-      this.baby.update(e.x,e.y,this.ctx);
-      this.easy.update(e.x,e.y,this.ctx);
-      this.nomal.update(e.x,e.y,this.ctx);
-      this.hard.update(e.x,e.y,this.ctx);
-      this.hell.update(e.x,e.y,this.ctx);
+export default class Stages extends Button{
+    constructor(text,x=0,y=0) {
+      super(text,x,y);
+      switch(this.text) {
+        case "BABY" :
+          this.stage = new Baby();
+          break
+        case "EASY" :
+          this.stage = new Easy();
+          break;
+        case "NORMAL" :
+          this.stage = new Normal();
+          break;
+        case "HARD" :
+          this.stage = new Hard();
+          break;
+        case "HELL" :
+          this.stage = new Hell();
+          break;
+      };
     }
 
-
-    draw() {
-        this.ctx.clearRect(0,0,this.canvas.width,this.canvas.height);
-        this.baby.draw(this.ctx);
-        this.easy.draw(this.ctx);
-        this.nomal.draw(this.ctx);
-        this.hard.draw(this.ctx);
-        this.hell.draw(this.ctx);
-      }
-
-
-  
+    run(ctx){
+      this.stage.run();;
+    };  
 }

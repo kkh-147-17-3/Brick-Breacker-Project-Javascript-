@@ -1,57 +1,40 @@
+import Player from "../../Player.js";
+
 export default class Hard{
-    constructor(x=0,y=0){
-        this.x = x;
-        this.y = y;
-        this.padding = 5;
-        this.isOnMouse = false;
-        this.isOnClick = false;
+    constructor(){
+        this.player1 = new Player("kkh","player1");
 
-    }
-
-    draw(ctx){
-        if(this.isOnMouse){
-            ctx.font ="100px Orbitron";
-            ctx.textBaseline = "top";
-            
-            
-            ctx.shadowBlur = 30;
-            ctx.shadowColor = "#c542cb";
-            ctx.fillStyle = "white";
-            ctx.fillText("Hard",this.x,this.y);
-            ctx.fillStyle = "#d0535e";
-            ctx.shadowBlur = 30;
-            ctx.shadowColor = "purple";
-            ctx.fillText("Hard", this.x+ this.padding, this.y + this.padding);
+        this.player1.keydownHandler = function(e) {
+            switch(e.code) {
+                case "KeyA" :
+                    this.isPressingLeft = true;
+                    break;
+                case "KeyD" :
+                    this.isPressingRight = true;
+                    break;
+                case "KeyS" :
+                    this.status = "launching";
+                    break;
+                case "Backquote":
+                    this.ballContainer.retriveAll();
+                    this.paddle.stopLaunching();
+                break;
+            }
         }
-        else {
-
-            ctx.font ="100px Orbitron";
-            ctx.textBaseline = "top";
-            
-            
-            ctx.shadowBlur = 30;
-            ctx.fillStyle = "#d0535e";
-            ctx.shadowColor = "purple";
-            ctx.fillText("Hard",this.x,this.y);
-            
-            ctx.shadowBlur = 30;
-            ctx.shadowColor = "#c542cb";
-            ctx.fillStyle = "white";
-            ctx.fillText("Hard", this.x+ this.padding, this.y + this.padding);
-
+        this.player1.keyupHandler = function(e){
+            switch(e.code) {
+                case "KeyA" :
+                    this.isPressingLeft = false;
+                break;
+                case "KeyD":
+                    this.isPressingRight = false;
+                break;
+            }
         }
     }
-    
-    update(x,y,ctx){
-        let textSize = ctx.measureText("Hard").width*2;
-        let maxX = textSize+this.x;
-        let minX = this.x;
-        let maxY = 100+this.y;
-        let minY = this.y;
 
-        if(x>=minX && x<=maxX && y>=minY && y<=maxY)
-            this.isOnMouse = true;
-        else 
-            this.isOnMouse = false;
+    run(){
+        this.player1.fadeIn();
+        this.player1.run();
     }
 }

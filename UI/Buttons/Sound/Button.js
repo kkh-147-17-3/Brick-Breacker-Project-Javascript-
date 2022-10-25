@@ -5,7 +5,7 @@ export default class Button{
         this.x = x; // x == 500
         this.y = y; // y == 400
         this.img = new Image();
-        this.img.src = "../../image/VolumeOff.png";
+        this.img.src = "./image/VolumeOff.png";
         this.img.width = 569;
         this.img.height = 449;
         this.width = this.img.width/5;
@@ -34,13 +34,13 @@ export default class Button{
             // this.ball.x = x - this.x;
             // return true;
                 if(this.status == "Off"){
-                    this.img.src = "../../image/VolumeON.png";
+                    this.img.src = "./image/VolumeON.png";
                     this.status = "On";
                     // console.log("이미지가 찍혔다.");
                 }
                 else{
                     this.status == "On"
-                    this.img.src = "../../image/VolumeOff.png";
+                    this.img.src = "./image/VolumeOff.png";
                     this.status = "Off";    
                 }
         }

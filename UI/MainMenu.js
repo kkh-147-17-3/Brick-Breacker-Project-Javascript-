@@ -18,6 +18,7 @@ export default class MainMenu {
         this.settingBtn = new Button("setting",370,700);
         this.helpBtn = new Button("help",770,700);
         this.developerBtn = new Button("developer",1100,700);
+        this.buttons = [this.startBtn,this.settingBtn,this.helpBtn,this.developerBtn];
         this.status = "opening";
 
 
@@ -32,7 +33,9 @@ export default class MainMenu {
         this.i = 0;
         this.count = 0;
     }
+
     mouseHandler() {
+
         //마우스가 올라가면 버튼 색 변경.
         this.canvas.onmousemove = (e) => {
             this.startBtn.onMouse(e.x,e.y,this.ctx);
@@ -103,12 +106,13 @@ export default class MainMenu {
         this.ctx.clearRect(0,0,this.canvas.width,this.canvas.height);
         this.ctx.globalAlpha = this.alpha;
         this.title.draw(this.ctx);
-        this.startBtn.draw(this.ctx);
-        this.settingBtn.draw(this.ctx);
-        this.helpBtn.draw(this.ctx);
-        this.developerBtn.draw(this.ctx);
+        // this.startBtn.draw(this.ctx);
+        // this.settingBtn.draw(this.ctx);
+        // this.helpBtn.draw(this.ctx);
+        // this.developerBtn.draw(this.ctx);
+        for(let button of this.buttons)
+            button.draw(this.ctx);
         this.ctx.restore();
-
         if(this.ctx.globalAlpha == 1) {
             this.onMouse();
         }
@@ -120,13 +124,11 @@ export default class MainMenu {
         }
         else{
             this.alpha -=0.08;
-            console.log(this.alpha);
         }
 
       }
 
       fadeIn(){
-        //   this.canvas.style.display = "";
            if(this.alpha + 0.04 > 1){
             this.alpha = 1;
         }
