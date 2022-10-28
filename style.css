@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@700&family=Orbitron:wght@800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lemon&display=swap');
+
+
+div{
+    display:flex;
+
+    justify-content: space-between;
+}
+
+#main{
+    display:flex;
+    justify-content: space-between;
+    position: absolute;
+    top: 700px;
+}
+
+#main *{
+    margin-left :20px;
+    margin-right: 20px;
+}
+
+
+#player1, #player2{
+    margin-left : auto;
+    margin-right : auto;
+    margin-top : 50px;
+    margin-bottom : 50px;
+    width:648px;
+    height:888px;
+    border: 3px solid beige;
+}
+
+#background{
+    position:absolute;
+    z-index: -1;
+}
+
+#ui {
+    position: absolute;
+    top : 0%;
+    left : 0%;
+}
+
+#victory, #defeat{
+    position: absolute;
+    top : 0%;
+    left : 0%;
+}
+
+#background {
+    position: absolute;
+    top: 0%;
+    left: 0%;
+}
+
+.fade-in{
+    animation: fadein 5s;
+    -moz-animation: fadein 5s; /* Firefox */
+    -webkit-animation: fadein 5s; /* Safari and Chrome */
+    -o-animation: fadein 5s; /* Opera */
+}
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+@-moz-keyframes fadein { /* Firefox */
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+@-webkit-keyframes fadein { /* Safari and Chrome */
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+@-o-keyframes fadein { /* Opera */
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+.fade-out{
+    animation: fadeout 2s;
+    opacity: 0.3;
+    -moz-animation: fadeout 2s; /* Firefox */
+    -webkit-animation: fadeout 2s; /* Safari and Chrome */
+    -o-animation: fadeout 2s; /* Opera */
+}
+
+@keyframes fadeout {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0.3;
+    }
+}
+@-moz-keyframes fadeout { /* Firefox */
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0.3;
+    }
+}
+@-webkit-keyframes fadeout { /* Safari and Chrome */
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0.3;
+    }
+}
+@-o-keyframes fadeout { /* Opera */
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0.3;
+    }
+}
