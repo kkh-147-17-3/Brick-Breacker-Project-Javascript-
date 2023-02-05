@@ -1,7 +1,7 @@
 import Player from "../../Player.js";
 import Button from "../Buttons/Button.js";
 import Stage1 from "./Hell/Stairs.js";
-import Stage2 from "./Hell/ThingsWelove.js";
+import Stage2 from '../Stage/Hell/Stairs.js';
 import Stage3 from "./Hell/XX.js";
 
 export default class Hell {

@@ -1,7 +1,6 @@
 
 import Player from "../../Player.js";
-import Stage1 from "./Hell/ThingsWelove.js"
-
+import Stage1 from '../Stage/Hell/Stairs.js';
 
 export default class Battle {
     constructor(){
