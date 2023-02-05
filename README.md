@@ -33,7 +33,7 @@
 - 아래의 모바일게임 “***Brick Breaker Quest”*** 의 기능을 최대한 구현하는 것을 목표로 하였습니다.
 
 <p align="center">
-    <img align="center" src="https://user-images.githubusercontent.com/102606939/216812389-b88ebcd4-4069-47da-8206-b1d4145bbeb7.png" width="500"/>
+    <img align="center" src="https://user-images.githubusercontent.com/102606939/216812389-b88ebcd4-4069-47da-8206-b1d4145bbeb7.png" width="300"/>
 </p>
 
 <br>
