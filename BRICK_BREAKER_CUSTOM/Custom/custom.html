@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BRICK MAP EDITOR</title>
+    <link rel="stylesheet" href="./custom.css">
+    <script type="module" src="./StageCustom.js"></script>
+    <link rel="icon" type="image/x-icon" href="/favicon-32.png" />
+</head>
+<body>
+    <div id="settings">
+        <div id = "custom-map">
+        </div>
+        <div id="brick-styling">
+            <div>
+                <span>row: </span><input id="table-row" type="text" placeholder="row 값을 입력해주세요" value="13">
+                <button id="make-table">표만들기</button>
+                <button id="add-row">한 줄 추가</button>
+                <button id="load-file">파일 불러오기</button>
+            </div>
+            <div>
+                <fieldset>
+                    <legend>스테이지 정보</legend>
+                    <div>
+                        <span>제작자</span><input type="text" id="creator" placeholder="입력 후 엔터">
+                    </div>
+                    <div>
+                        <span>스테이지 이름</span><input type="text" id="stage-name" placeholder="입력 후 엔터">
+                    </div>
+                    <div>
+                        <span>난이도</span><input type="text" name="" id="difficulty" placeholder="입력 후 엔터">
+                    </div>
+                    <div>
+                        <span>시작 공 갯수</span><input type="text" name="" id="ball-number" placeholder="입력 후 엔터">
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend>벽돌 색상 선택</legend>
+                    <input type="radio" name="overlay" id="stroke-overlay" value="stroke" checked>테두리가 위로
+                    <input type="radio" name="overlay" id="fill-overlay" value="fill">채우기가 위로
+                    <fieldset>
+                        <legend>테두리</legend>
+                        테두리 그리기<input type="checkbox" id="stroke-check" checked>
+                        <div>
+                            일반 <input type="radio" name="stroke" id="stroke-normal-check" checked>
+                            테두리색상<input id="stroke-style" type="color" value="#1e44dc">RGB value : <span id="stroke-style-value">"#1e44dc"</span>
+                        </div>
+                        <div>
+                            그라디언트 적용 <input type="radio" name="stroke" id="stroke-gradient-check">
+                            시작 색상 <input id="stroke-gradient-start" type="color" value="#000000">RGB value : <span id="stroke-gradient-start-value">#000000</span>
+                            끝 색상 <input id="stroke-gradient-end" type="color" value="#000000">RGB value : <span id="stroke-gradient-end-value">#000000</span>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <legend>채우기</legend>
+                        색 채우기<input type="checkbox" id="fill-check" checked>
+                        <div>
+                            일반 <input type="radio" name="fill" id="fill-normal-check" checked>
+                            채우기색상<input id="fill-style" type="color" value="#000000">RGB value : <span id="fill-style-value">#000000</span>
+                        </div>
+                        <div>
+                            그라디언트 적용 <input type="radio" name="fill" id="fill-gradient-check">
+                            시작 색상 <input id="fill-gradient-start" type="color" value="#000000">RGB value : <span id="fill-gradient-start-value">#000000</span>
+                            끝 색상 <input id="fill-gradient-end" type="color" value="#000000">RGB value : <span id="fill-gradient-end-value">#000000</span>
+                        </div>
+                    </fieldset>
+                </fieldset>
+                <fieldset>
+                    <legend>그림자 조절</legend>
+                    그림자 그리기<input type="checkbox" id="shadow-check">
+                    <div>
+                        그림자 색상 <input id="shadow-color" type="color" value="#000000">RGB value : <span id="shadow-color-value">#000000</span>
+                    </div>
+                    <input id="shadow-blur" type="range" value="0" min="0" max="20" step="1">블러정도: <span id="shadow-blur-value">0</span>
+                </fieldset>
+                <fieldset>
+                    <legend>투명도 조절</legend>
+                    <input id="set-alpha" type="range" value="1" min="0" max="1" step="0.1"> <label>alpha: </label><span id="alpha-value">1</span>
+                </fieldset>
+                </div>
+                <fieldset>
+                    <legend>벽돌 체력</legend>
+                    <input id="health" type="text" placeholder="[1~999] 입력 후 엔터"><span style="display:none">잘못된 입력값입니다.</span>
+                </fieldset>
+            
+                <div id="select-brick">
+                    <fieldset>
+                        <legend>블록선택</legend>
+                        <canvas class="brick-canvas square" draggable="true"></canvas>
+                        <canvas class="brick-canvas triangle1" draggable="true"></canvas>
+                        <canvas class="brick-canvas triangle2" draggable="true"></canvas>
+                        <canvas class="brick-canvas triangle3" draggable="true"></canvas>
+                        <canvas class="brick-canvas triangle4" draggable="true"></canvas>
+                        <canvas class="brick-canvas bomb" draggable="true"></canvas>
+                        <canvas class="brick-canvas ball-up" draggable="true"></canvas>
+                        <canvas class="brick-canvas laser" draggable="true"></canvas>
+                        <canvas class="to-data-url-canvas square" style="display:none"></canvas>
+                        <canvas class="to-data-url-canvas triangle1"  style="display:none"></canvas>
+                        <canvas class="to-data-url-canvas triangle2" style="display:none"></canvas>
+                        <canvas class="to-data-url-canvas triangle3" style="display:none"></canvas>
+                        <canvas class="to-data-url-canvas triangle4" style="display:none"></canvas>
+                        <canvas class="to-data-url-canvas bomb" style="display:none"></canvas>
+                        <canvas class="to-data-url-canvas ball-up" style="display:none"></canvas>
+                        <canvas class="to-data-url-canvas laser" style="display:none"></canvas>
+                    </fieldset>
+                </div>
+                <div>
+                    <button id="save-stage">스테이지 저장</button>
+                </div>
+            </div>
+            <div id="ball-styling">
+                <fieldset>
+                    <legend>공 색상 선택</legend>
+                    <input type="radio" name="ball-overlay" id="ball-stroke-overlay" value="stroke" checked>테두리가 위로
+                    <input type="radio" name="ball-overlay" id="ball-fill-overlay" value="fill">채우기가 위로
+                    <fieldset>
+                        <legend>테두리</legend>
+                        테두리 그리기<input type="checkbox" id="ball-stroke-check" checked>
+                        <div>
+                            일반 <input type="radio" name="ball-stroke" id="ball-stroke-normal-check" checked>
+                            테두리색상<input id="ball-stroke-style" type="color" value="#1e44dc" onchange="getStrokeStyle()">RGB value : <span id="ball-stroke-style-value">"#1e44dc"</span>
+                        </div>
+                        <div>
+                            그라디언트 적용 <input type="radio" name="ball-stroke" id="ball-stroke-gradient-check">
+                            시작 색상 <input id="ball-stroke-gradient-start" type="color" value="#000000">RGB value : <span id="ball-stroke-gradient-start-value">#000000</span>
+                            끝 색상 <input id="ball-stroke-gradient-end" type="color" value="#000000">RGB value : <span id="ball-stroke-gradient-end-value">#000000</span>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <legend>채우기</legend>
+                        색 채우기<input type="checkbox" id="ball-fill-check" checked>
+                        <div>
+                            일반 <input type="radio" name="ball-fill" id="ball-fill-normal-check" checked>
+                            채우기색상<input id="ball-fill-style" type="color" value="#000000">RGB value : <span id="ball-fill-style-value">#000000</span>
+                        </div>
+                        <div>
+                            그라디언트 적용 <input type="radio" name="ball-fill" id="ball-fill-gradient-check">
+                            시작 색상 <input id="ball-fill-gradient-start" type="color" value="#000000">RGB value : <span id="ball-fill-gradient-start-value">#000000</span>
+                            끝 색상 <input id="ball-fill-gradient-end" type="color" value="#000000">RGB value : <span id="ball-fill-gradient-end-value">#000000</span>
+                        </div>
+                    </fieldset>
+                </fieldset>
+                <fieldset>
+                    <legend>그림자 조절</legend>
+                    그림자 그리기<input type="checkbox" id="ball-shadow-check">
+                    <div>
+                        그림자 색상 <input id="ball-shadow-color" type="color" value="#000000">RGB value : <span id="ball-shadow-color-value">#000000</span>
+                    </div>
+                    <input id="ball-shadow-blur" type="range" value="0" min="0" max="20" step="1">블러정도: <span id="ball-shadow-blur-value">0</span>
+                </fieldset>
+                <fieldset>
+                    <legend>투명도 조절</legend>
+                    <input id="ball-set-alpha" type="range" value="1" min="0" max="1" step="0.1"> <label>alpha: </label><span id="ball-alpha-value">1</span>
+                </fieldset>
+                <fieldset>
+                    <legend>공 크기 조절</legend>
+                    <input id="set-ball-size" type="range" value="10" min="6" max="10" step="0.5"> <label>radius: </label><span id="ball-size-value">10</span>
+                </fieldset>
+                <fieldset>
+                    <legend>예상 공모양</legend>
+                    <canvas id="ball"></canvas>
+                    <canvas id="ball-to-data-url"></canvas>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
