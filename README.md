@@ -4,9 +4,15 @@
 <aside>
 💡 본격적인 웹 사이트 개발 프로젝트 전, 브라우저 기반 게임 프로젝트를 진행했습니다. 별도의 라이브러리나 툴을 사용하지 않고 Canvas API, Vanilla js 만을 사용하여 게임을 개발하였습니다.
 
+
 </aside>
 <br>
 <br>
+
+## 플레이 화면
+<p align="center">
+    <img src="https://user-images.githubusercontent.com/102606939/216813893-6500c422-d0d1-4db3-b631-7a65ca8346f4.gif" width="700"/>
+</p>
 
 ## 주요 화면
 
