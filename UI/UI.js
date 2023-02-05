@@ -5,7 +5,7 @@ import MainMenu from "./MainMenu.js";
 import Developer from "./Page/Developer.js";
 import Start from "./Page/Start.js";
 import Help from "./Page/Help.js"
-import SoundContainer from "/sound/SoundContainer.js";
+import SoundContainer from "../sound/SoundContainer.js";
 import Victory from "./Victory/VictoryEffect.js"
 import Defeat from "./Defeat/DefeatEffect.js";
 export default class UI {

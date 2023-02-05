@@ -1,10 +1,9 @@
 // import Developer from "./Buttons/Developer.js";
 // import Button from "./Buttons/Button"
 
+import SoundContainer from "../sound/SoundContainer.js";
 import Button from "./Buttons/Button.js";
 import Title from "./Title.js"
-import SoundContainer from "/sound/SoundContainer.js";
-
     
 
 
